@@ -4,6 +4,7 @@ import com.java_ne.dtos.customer.CreateSavingDTO;
 import com.java_ne.dtos.customer.CreateTransferDTO;
 import com.java_ne.dtos.customer.CreateWithdrawDTO;
 import com.java_ne.dtos.response.ApiResponse;
+import com.java_ne.exceptions.BadRequestException;
 import com.java_ne.exceptions.CustomException;
 import com.java_ne.exceptions.NotFoundException;
 import com.java_ne.models.SavingManagement;
@@ -59,6 +60,11 @@ public class CustomerServiceImpl implements CustomerService {
             userRepository.save(user);
 
             //Save a saving
+
+            if(user.getAmount() < data.getAmount()){
+                throw new BadRequestException("Not enough amount to perform this action");
+            }
+
             WithdrawManagement withdraw = new WithdrawManagement();
             withdraw.setCustomer(user);
             withdraw.setAmount(data.getAmount());
@@ -82,6 +88,10 @@ public class CustomerServiceImpl implements CustomerService {
 
             if(receiver.isEmpty()){
                 throw new NotFoundException("Customer with account number " + data.getAccountNumber() + " not found");
+            }
+
+            if(user.getAmount() > receiver.get().getAmount()){
+                throw new BadRequestException("Not enough amount to perform this action");
             }
 
             Transfer transfer = new Transfer();

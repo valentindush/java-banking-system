@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/customer")
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole()")
+@PreAuthorize("hasAuthority('USER')")
 public class CustomerController {
     private final CustomerService customerService;
 
