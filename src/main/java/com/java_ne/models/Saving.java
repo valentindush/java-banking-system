@@ -1,10 +1,7 @@
 package com.java_ne.models;
 
 import com.java_ne.enumerations.Type;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,12 +16,13 @@ import org.hibernate.annotations.OnDeleteAction;
 @OnDelete(action = OnDeleteAction.CASCADE)
 @NoArgsConstructor
 @AllArgsConstructor
-public class WithdrawManagement extends Base{
+public class Saving extends Base{
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User customer;
 
     private String accountNumber;
     private Double amount;
-    private Type type=Type.WITHDRAW;
+    private Type type=Type.SAVING;
 }

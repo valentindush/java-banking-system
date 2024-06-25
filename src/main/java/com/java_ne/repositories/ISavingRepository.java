@@ -1,7 +1,7 @@
 package com.java_ne.repositories;
 
-import com.java_ne.models.SavingManagement;
+import com.java_ne.models.Saving;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ISavingRepository extends JpaRepository<SavingManagement, Long> {
+public interface ISavingRepository extends JpaRepository<Saving, Long> {
 }

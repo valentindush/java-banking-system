@@ -5,25 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BNR - Amount Saving/Withdrawal</title>
     <style>
-        *{
-            font-family: "Roboto Thin",sans-serif;
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
-        .header-container{
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #2463b5;
+            color: #ffffff;
             padding: 20px;
-            border: 2px solid #e3dfdf;
-            border-radius: 20px;
+            text-align: center;
         }
-        h2{
-            color: #2463b5;
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .footer {
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #2463b5;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-<div class="header-container">
-    <h2>BNR - Amount Saving/Withdrawal</h2>
-
-    <div class="">
-        <p>Dear ${name} your SAVING of ${amount}  on your account ${accountNumber} has been completed successfully</p>
+<div class="container">
+    <div class="header">
+        <h2 th:text="${title}">BNR - Amount Saving/Withdrawal</h2>
+    </div>
+    <div class="content">
+        <p th:text="${message}">Dear [name], your SAVING of [amount] on your account [accountNumber] has been completed successfully.</p>
+        <p>If you have any questions or concerns, please don't hesitate to contact our customer support.</p>
+        <a href="#" class="btn">View Transaction Details</a>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 BNR Bank. All rights reserved.</p>
     </div>
 </div>
 </body>
