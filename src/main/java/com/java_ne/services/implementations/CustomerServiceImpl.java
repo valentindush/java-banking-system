@@ -37,34 +37,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public ResponseEntity<ApiResponse<List<Saving>>> getSavings() {
-        try {
+        try{
             User user = userService.getLoggedInUser();
-            List<Saving> savings = user.getSavings();
-            return ResponseEntity.ok(ApiResponse.success("OK", HttpStatus.OK, savings).getBody());
-        } catch (Exception e) {
-            throw new CustomException(e);
+            return ApiResponse.success("OK", HttpStatus.OK, user.getSavings());
+        }catch (Exception e){
+            throw  new CustomException(e);
         }
     }
 
     @Override
     public ResponseEntity<ApiResponse<List<Withdraw>>> getWithdraws() {
-        try {
+        try{
             User user = userService.getLoggedInUser();
-            List<Withdraw> withdrawals = user.getWithdrawals();
-            return ResponseEntity.ok(ApiResponse.success("OK", HttpStatus.OK, withdrawals).getBody());
-        } catch (Exception e) {
-            throw new CustomException(e);
+            return ApiResponse.success("OK", HttpStatus.OK, user.getWithdrawals());
+        }catch (Exception e){
+            throw  new CustomException(e);
         }
     }
 
     @Override
     public ResponseEntity<ApiResponse<List<Transfer>>> getTransfers() {
-        try {
+        try{
             User user = userService.getLoggedInUser();
-            List<Transfer> transfers = user.getTransfers();
-            return ResponseEntity.ok(ApiResponse.success("OK", HttpStatus.OK, transfers).getBody());
-        } catch (Exception e) {
-            throw new CustomException(e);
+            return ApiResponse.success("OK", HttpStatus.OK, user.getTransfers());
+        }catch (Exception e){
+            throw  new CustomException(e);
         }
     }
 
