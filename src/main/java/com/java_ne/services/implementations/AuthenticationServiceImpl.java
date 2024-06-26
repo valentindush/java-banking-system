@@ -1,6 +1,7 @@
 package com.java_ne.services.implementations;
 
 import com.java_ne.dtos.auth.AuthResponse;
+import com.java_ne.exceptions.BadRequestException;
 import com.java_ne.exceptions.CustomException;
 import com.java_ne.dtos.auth.LoginDTO;
 import com.java_ne.dtos.auth.RegisterUserDTO;
@@ -22,6 +23,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -33,6 +36,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public ResponseEntity<ApiResponse<AuthResponse>> register(RegisterUserDTO registerUserDTO) {
         try {
+
+            Optional<User> accExists = userRepository.findUserByAccountNumber(registerUserDTO.getAccountNumber());
+
+            if(accExists.isPresent()){
+                throw new BadRequestException("Account number already exists");
+            }
+
             CreateUserDTO createUserDTO = new CreateUserDTO(registerUserDTO);
             User user = userService.createUserEntity(createUserDTO);
             userRepository.save(user);
