@@ -1,6 +1,8 @@
 package com.java_ne.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.java_ne.enumerations.user.EUserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -75,12 +77,15 @@ public class User extends Base {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Saving> savings;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Transfer> transfers;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Withdraw> withdrawals;
 
     public User(String username, String email, String password, EUserStatus status, boolean verified) {
